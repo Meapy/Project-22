@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TerrainFace
-{
+public class TerrainFace {
+
     Mesh mesh;
     int resolution;
     Vector3 localUp;
     Vector3 axisA;
     Vector3 axisB;
 
-    public TerrainFace(Mesh mesh, int resolution, Vector3 localUp, Material material)
+    public TerrainFace(Mesh mesh, int resolution, Vector3 localUp)
     {
         this.mesh = mesh;
         this.resolution = resolution;
@@ -19,6 +19,7 @@ public class TerrainFace
         axisA = new Vector3(localUp.y, localUp.z, localUp.x);
         axisB = Vector3.Cross(localUp, axisA);
     }
+
     public void ConstructMesh()
     {
         Vector3[] vertices = new Vector3[resolution * resolution];
@@ -34,6 +35,7 @@ public class TerrainFace
                 Vector3 pointOnUnitCube = localUp + (percent.x - 0.5f) * 2 * axisA + (percent.y - 0.5f) * 2 * axisB;
                 Vector3 pointOnUnitSphere = pointOnUnitCube.normalized;
                 vertices[i] = pointOnUnitSphere;
+
                 if (x != resolution - 1 && y != resolution - 1)
                 {
                     triangles[triIndex] = i;
@@ -52,5 +54,4 @@ public class TerrainFace
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
     }
-
 }
