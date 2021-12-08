@@ -10,7 +10,7 @@ public class Planet : MonoBehaviour
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
 
-    public void onValidate()
+    public void OnValidate()
     {
         Initialize();
         GenerateMesh();
