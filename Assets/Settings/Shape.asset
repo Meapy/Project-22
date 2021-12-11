@@ -15,20 +15,65 @@ MonoBehaviour:
   planetRadius: 2.47
   noiseLayers:
   - enabled: 1
+    useFirstLayerAsMask: 0
     noiseSettings:
-      strength: 0.15
-      numLayers: 4
-      baseRoughness: 0.55
-      roughness: 2.48
-      persistence: 0.34
-      centre: {x: 0, y: 0, z: 0}
-      minValue: 0.52
+      filterType: 0
+      simpleNoiseSettings:
+        strength: 0.36
+        numLayers: 4
+        baseRoughness: 0.85
+        roughness: 2.05
+        persistence: 0.53
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 0.95
+      ridgidNoiseSettings:
+        strength: 1
+        numLayers: 1
+        baseRoughness: 1
+        roughness: 2
+        persistence: 0.5
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 0
+        weightMultiplier: 0.8
   - enabled: 1
+    useFirstLayerAsMask: 1
     noiseSettings:
-      strength: 0.38
-      numLayers: 4
-      baseRoughness: 1.08
-      roughness: 1.86
-      persistence: 0.5
-      centre: {x: 0, y: 0, z: 0}
-      minValue: 1
+      filterType: 0
+      simpleNoiseSettings:
+        strength: 1.6
+        numLayers: 4
+        baseRoughness: 3.1
+        roughness: 3.07
+        persistence: 0.37
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 2.52
+      ridgidNoiseSettings:
+        strength: 1
+        numLayers: 1
+        baseRoughness: 1
+        roughness: 2
+        persistence: 0.5
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 0
+        weightMultiplier: 0.8
+  - enabled: 0
+    useFirstLayerAsMask: 1
+    noiseSettings:
+      filterType: 1
+      simpleNoiseSettings:
+        strength: 1
+        numLayers: 1
+        baseRoughness: 1
+        roughness: 2
+        persistence: 0.5
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 0
+      ridgidNoiseSettings:
+        strength: 1.64
+        numLayers: 4
+        baseRoughness: 1.76
+        roughness: 1.7
+        persistence: 1.23
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 2.22
+        weightMultiplier: 0.98

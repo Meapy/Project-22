@@ -5,4 +5,5 @@ using UnityEngine;
 public class ColourSettings : ScriptableObject
 {
     public Color planetColour = Color.white;
+    public Material planetMaterial;
 }
