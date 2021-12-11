@@ -11,9 +11,9 @@ public class ColourGenerator {
     public void UpdateSettings(ColourSettings settings)
     {
         this.settings = settings;
-        if (texture == null)
+        if (texture == null || texture.height != settings.biomeColourSettings.biomes.Length)
         {
-            texture = new Texture2D(textureResolution, 1);
+            texture = new Texture2D(textureResolution, settings.biomeColourSettings.biomes.Length);
         }
     }
 
@@ -21,14 +21,42 @@ public class ColourGenerator {
     {
         settings.planetMaterial.SetVector("_elevationMinMax", new Vector4(elevationMinMax.Min, elevationMinMax.Max));
     }
+    public float BiomePercentFromPoint(Vector3 pointOnUnitSphere)
+    {
+        float heightPercent = (pointOnUnitSphere.y + 1) / 2f;
+        float biomeIndex = 0;
+        int nBiomes = settings.biomeColourSettings.biomes.Length;
+
+        for(int i = 0; i < nBiomes; i++)
+        {
+            if(settings.biomeColourSettings.biomes[i].startHeight < heightPercent)
+            {
+                biomeIndex = i;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return biomeIndex / (float)nBiomes;
+    }
 
     public void UpdateColours()
     {
-        Color[] colours = new Color[textureResolution];
-        for (int i = 0; i < textureResolution; i++)
+        Color[] colours = new Color[texture.width * texture.height];
+        int colourIndex = 0;
+        foreach(var biome in settings.biomeColourSettings.biomes)
         {
-            colours[i] = settings.gradient.Evaluate(i / (textureResolution - 1f));
+            for (int i = 0; i < textureResolution; i++)
+            {
+                Color gradientColour = biome.gradient.Evaluate(i / (textureResolution - 1f));
+                Color tintColour = biome.tint;
+                colours[colourIndex] = gradientColour * (1-biome.tintPercent) + tintColour * biome.tintPercent;
+                colourIndex++;
+            }
+
         }
+
         texture.SetPixels(colours);
         texture.Apply();
         settings.planetMaterial.SetTexture("_texture", texture);
