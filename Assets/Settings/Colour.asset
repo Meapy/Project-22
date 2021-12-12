@@ -116,7 +116,7 @@ MonoBehaviour:
       simpleNoiseSettings:
         strength: 1
         numLayers: 5
-        baseRoughness: 1.96
+        baseRoughness: 2.04
         roughness: 3.75
         persistence: 0.18
         centre: {x: 0, y: 0, z: 0}
@@ -132,7 +132,7 @@ MonoBehaviour:
         weightMultiplier: 0.8
     noiseOffset: 1.82
     noiseStrength: -0.08
-    blendAmount: 0.6
+    blendAmount: 0.27
   oceanColour:
     serializedVersion: 2
     key0: {r: 0.020425411, g: 0.067399584, b: 0.4811321, a: 1}
