@@ -6,6 +6,8 @@ public class Planet : MonoBehaviour
 {   
     [Range(2, 256)]
     public int resolution = 10;
+    [Range(-10,10)]
+    public float rotationSpeed = 1f;
     public bool autoUpdate = true;
     public enum FaceRenderMask { All, Top, Bottom, Left, Right, Front, Back };
     public FaceRenderMask faceRenderMask;
@@ -23,7 +25,10 @@ public class Planet : MonoBehaviour
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
-
+    void Start()
+    {
+        GeneratePlanet();
+    }
     void Initialize()
     {
         shapeGenerator.UpdateSettings(shapeSettings);
