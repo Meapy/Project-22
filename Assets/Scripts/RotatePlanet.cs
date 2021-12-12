@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RotatePlanet : MonoBehaviour
 {
-    [Range(-10,10)]
+    [Range(-100,100)]
     public float rotationSpeed = 1f;
     // Update is called once per frame
     void Update()
