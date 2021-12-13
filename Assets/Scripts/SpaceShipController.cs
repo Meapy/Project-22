@@ -14,12 +14,11 @@ public class SpaceShipController : MonoBehaviour
 
     Quaternion targetRot;
     Quaternion smoothedRot;
-    Rigidbody rb;
 
     public float thrustStrength = 10;
     public float rotSpeed = 5;
     public float rollSpeed = 15;
-    public float rotSmoothSpeed = 5;
+    public float rotSmoothSpeed = 2.5f;
     public bool lockCursor;
     Vector3 thrusterInput;
     int numCollisionTouches = 0;
@@ -50,8 +49,8 @@ public class SpaceShipController : MonoBehaviour
         thrusterInput = new Vector3 (thrustInputX, thrustInputY, thrustInputZ);
 
         // Rotation input
-        float yawInput = rotSpeed;
-        float pitchInput = rotSpeed;
+        float pitchInput = GetInputAxis (rollCounterKey, rollClockwiseKey);
+        float yawInput = GetInputAxis (leftKey, rightKey);
         float rollInput = GetInputAxis (rollCounterKey, rollClockwiseKey) * rollSpeed * Time.deltaTime;
 
         //smooth Rotation
