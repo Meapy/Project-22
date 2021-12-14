@@ -7,11 +7,7 @@ public class Camera : MonoBehaviour
     public Transform target;
     public Vector3 target_Offset;
     public float speed = 1f;
-
-    bool switched1 = true;
-    bool switched2 = true;
-    public float rotationSpeed = 1f;
-
+    
     private void Start()
     {
         target_Offset = transform.position - target.position;
@@ -52,7 +48,6 @@ public class Camera : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, target.position + target_Offset, 1.1f);
                 transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
  
-                switched1 = true;
                 Debug.Log("this is to the front");
 
             }

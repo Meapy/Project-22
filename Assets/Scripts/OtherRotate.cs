@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class OtherRotate : MonoBehaviour
 {
-    public float rotationSpeed = 10f;
+    public float rotationSpeed = 5f;
     public GameObject target;
+    void Start()
+    {
+        //if target is the sun then set the rotationSpeed *= .2f;
+        if (target.name == "Sun")
+        {
+            rotationSpeed *= .2f;
+        }
+    }
     
     void Update()
-    {
+    {   
+
         //rotate an object on the spot
         transform.RotateAround(target.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
         Debug.Log("this is getting called");

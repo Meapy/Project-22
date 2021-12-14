@@ -5,8 +5,11 @@ public class SpaceShipController : MonoBehaviour
 {
     KeyCode ascendKey = KeyCode.Space;
     KeyCode descendKey = KeyCode.LeftShift;
-    KeyCode rollCounterKey = KeyCode.Q;
-    KeyCode rollClockwiseKey = KeyCode.E;
+    KeyCode rollCounterKey = KeyCode.LeftArrow;
+    KeyCode rollClockwiseKey = KeyCode.RightArrow;
+    //set pitch up to up arrow
+    KeyCode PitchUp = KeyCode.UpArrow;
+    KeyCode PitchDown = KeyCode.DownArrow;
     KeyCode forwardKey = KeyCode.W;
     KeyCode backwardKey = KeyCode.S;
     KeyCode leftKey = KeyCode.A;
@@ -49,9 +52,9 @@ public class SpaceShipController : MonoBehaviour
         thrusterInput = new Vector3 (thrustInputX, thrustInputY, thrustInputZ);
 
         // Rotation input
-        float pitchInput = GetInputAxis (rollCounterKey, rollClockwiseKey);
+        float pitchInput = GetInputAxis (PitchUp,PitchDown);
         float yawInput = GetInputAxis (leftKey, rightKey);
-        float rollInput = GetInputAxis (rollCounterKey, rollClockwiseKey) * rollSpeed * Time.deltaTime;
+        float rollInput = GetInputAxis (rollCounterKey, rollClockwiseKey); //* rollSpeed * Time.deltaTime;
 
         //smooth Rotation
         targetRot = Quaternion.Euler (pitchInput, yawInput, rollInput) * targetRot;
@@ -63,7 +66,7 @@ public class SpaceShipController : MonoBehaviour
         // Apply thruster force
         if (thrusterInput.magnitude > 0)
         {
-            GetComponent<Rigidbody>().AddRelativeForce (thrusterInput * thrustStrength);
+            GetComponent<Rigidbody>().AddRelativeForce(thrusterInput * thrustStrength);
         }
 
 
