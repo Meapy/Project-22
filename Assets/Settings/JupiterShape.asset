@@ -10,49 +10,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb2b94a0404a5304690ebc8ddd57358e, type: 3}
-  m_Name: SunShape
+  m_Name: JupiterShape
   m_EditorClassIdentifier: 
-  planetRadius: 100
+  planetRadius: 30
   noiseLayers:
   - enabled: 1
     useFirstLayerAsMask: 0
     noiseSettings:
       filterType: 0
       simpleNoiseSettings:
-        strength: -0.07
-        numLayers: 5
-        baseRoughness: 1.87
-        roughness: 3.27
-        persistence: 0.35
-        centre: {x: -0.1, y: 0.46, z: 0.74}
-        minValue: 0.85
+        strength: 0.07
+        numLayers: 8
+        baseRoughness: 1.74
+        roughness: 2.23
+        persistence: 0.63
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 1.1
       ridgidNoiseSettings:
-        strength: 0
-        numLayers: 0
-        baseRoughness: 0
-        roughness: 0
-        persistence: 0
+        strength: 1
+        numLayers: 1
+        baseRoughness: 1
+        roughness: 2
+        persistence: 0.5
         centre: {x: 0, y: 0, z: 0}
         minValue: 0
-        weightMultiplier: 0
+        weightMultiplier: 0.8
   - enabled: 1
     useFirstLayerAsMask: 1
     noiseSettings:
       filterType: 1
       simpleNoiseSettings:
-        strength: 0.5
+        strength: 1.22
         numLayers: 8
-        baseRoughness: 1.93
-        roughness: 2.54
-        persistence: 0.28
-        centre: {x: -0.1, y: 0.46, z: 0.74}
-        minValue: 0.97
-      ridgidNoiseSettings:
-        strength: 0.22
-        numLayers: 4
-        baseRoughness: 3.76
-        roughness: 3.41
-        persistence: 4.23
+        baseRoughness: 2.66
+        roughness: 3.11
+        persistence: 0.12
         centre: {x: 0, y: 0, z: 0}
-        minValue: 0.84
-        weightMultiplier: 0.13
+        minValue: 2.38
+      ridgidNoiseSettings:
+        strength: 1.37
+        numLayers: 8
+        baseRoughness: 1.53
+        roughness: 3.3
+        persistence: 0.5
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 0.3
+        weightMultiplier: 0.7
