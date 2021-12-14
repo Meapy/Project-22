@@ -8,6 +8,10 @@ public class Camera : MonoBehaviour
     public Vector3 target_Offset;
     public float speed = 1f;
 
+    bool switched1 = true;
+    bool switched2 = true;
+
+
     private void Start()
     {
         target_Offset = transform.position - target.position;
@@ -16,23 +20,45 @@ public class Camera : MonoBehaviour
     {
         if (target)
         {
-            if(target.transform.eulerAngles.y > 100 && target.transform.eulerAngles.y < 180 || target.transform.eulerAngles.y <= -180 && target.transform.eulerAngles.y >= -100)
+            if((target.transform.eulerAngles.y > 60 && target.transform.eulerAngles.y < 140) )
             {
-                //transform.position = new Vector3(transform.position.x, transform.position.y, target.transform.position.z + 30);
-                float zAxis = target.transform.position.z + 30;
+
                 transform.position = Vector3.Lerp(transform.position, target.position-target_Offset,1.1f);
+                transform.position = new Vector3(transform.position.x - 30, transform.position.y + 3.36f, target.transform.position.z);
+
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 90, transform.eulerAngles.z);
+                Debug.Log("this is to the right");
+
+            }
+            else if((target.transform.eulerAngles.y > 140 && target.transform.eulerAngles.y < 230) )
+            {
+
+                transform.position = Vector3.Lerp(transform.position, target.position-target_Offset,1.1f);
+                transform.position = new Vector3(transform.position.x, transform.position.y + 3.36f, transform.position.z);
                 transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z);
-                Debug.Log("#2 is called");
+
+                Debug.Log("this is to the back");
+            }
+            else if ((target.transform.eulerAngles.y > 230 && target.transform.eulerAngles.y < 320) )
+            {
+                transform.position = Vector3.Lerp(transform.position, target.position-target_Offset,1.1f);
+                transform.position = new Vector3(transform.position.x + 30, transform.position.y + 3.36f, target.transform.position.z);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 270, transform.eulerAngles.z);
+
+                Debug.Log("this is to the left");
             }
             else
-            {
-                transform.position = Vector3.Lerp(transform.position, target.position+target_Offset, 1.1f);
+            {   
+                transform.position = Vector3.Lerp(transform.position, target.position + target_Offset, 1.1f);
                 transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
-                Debug.Log("#1 is called");
+ 
+                switched1 = true;
+                Debug.Log("this is to the front");
+
             }
 
         }
-        RotateCamera();
+        //RotateCamera();
     }
     void RotateCamera()
     {
