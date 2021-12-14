@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class OtherRotate : MonoBehaviour
 {
-    public float rotationSpeed = 1f;
+    public float rotationSpeed = 10f;
+    public GameObject target;
     
-    void update()
+    void Update()
     {
         //rotate an object on the spot
-        Vector3 v = transform.localRotation.eulerAngles;
-        transform.localRotation = Quaternion.Euler(v.x + rotationSpeed, v.y + rotationSpeed, v.z + rotationSpeed);
+        transform.RotateAround(target.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
+        Debug.Log("this is getting called");
     }
 }
