@@ -20,6 +20,5 @@ public class OtherRotate : MonoBehaviour
 
         //rotate an object on the spot
         transform.RotateAround(target.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
-        Debug.Log("this is getting called");
     }
 }
