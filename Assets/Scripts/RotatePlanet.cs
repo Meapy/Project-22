@@ -9,7 +9,7 @@ public class RotatePlanet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Increment the rotation of the object around the Y axis using planet.rotationSpeed
+        // Increment the rotation of the object around the Y axis using rotationSpeed
         transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
     }
 }

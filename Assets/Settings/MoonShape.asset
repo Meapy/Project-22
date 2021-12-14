@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb2b94a0404a5304690ebc8ddd57358e, type: 3}
   m_Name: MoonShape
   m_EditorClassIdentifier: 
-  planetRadius: 1.5
+  planetRadius: 2
   noiseLayers:
   - enabled: 1
     useFirstLayerAsMask: 0
