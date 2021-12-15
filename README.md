@@ -277,20 +277,20 @@ Here is a screenshot of the spaceship and some of the planets:
 | All the Materials and Colour + Shape Settings | Self written |
 | SpaceShipController.cs | Modified from [Sebastian Lague](https://github.com/SebLague/Solar-System/blob/Episode_01/Assets/Scripts/Controllers/Ship.cs) |
 | All other scripts | Modified/Adapted/Used From [Sebastian Lague](https://www.youtube.com/watch?v=QN39W020LqU&list=PLFt_AvWsXl0cONs3T0By4puYy6GM22ko8) |
-
 | Song: Galaxy | From [MVSE](https://www.youtube.com/watch?v=5GIt806zZow) |
 
 
 # References
 Assets:
 Spaceship model: https://assetstore.unity.com/packages/3d/vehicles/air/space-cruiser-1-124172
+
 Skybox: https://assetstore.unity.com/packages/3d/environments/sci-fi/real-stars-skybox-lite-116333
 
 Tutorials:
 https://www.youtube.com/watch?v=QN39W020LqU&list=PLFt_AvWsXl0cONs3T0By4puYy6GM22ko8 by Sebastian Lague
 
 # What I am most proud of in the assignment
-What I am most proud of in the assignment is with how much i was able to get done, and how much I learned. My favourite part of the project is the cinematic camera on the Earth planet. 
+What I am most proud of in the assignment is with how much i was able to get done, and how much I learned. My favourite part of the project is the cinematic camera on the Earth planet. Im also proud of how much i managed to get done and how motivated i was to not settle and always try to add more features to make the experience more complete
 
 # Proposal submitted earlier can go here:
 My idea is to create a solar system procedurally, all the planets have different terrains, maybe even allowing the user to change how it is generated using sliders. Depending on how I manage, ~~I will attempt to also have it react to audio~~
@@ -299,70 +299,7 @@ My idea is to create a solar system procedurally, all the planets have different
 # Video:
 [![YouTube](http://img.youtube.com/vi/SWo_kEITHo8/0.jpg)](https://www.youtube.com/watch?v=SWo_kEITHo8)
 
-## This is how to markdown text:
-
-This is *emphasis*
-
-This is a bulleted list
-
-- Item
-- Item
-
-This is a numbered list
-
-1. Item
-1. Item
-
-This is a [hyperlink](http://bryanduggan.org)
-
-# Headings
-## Headings
-#### Headings
-##### Headings
-
-This is code:
-
-```Java
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-So is this without specifying the language:
-
-```
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-This is an image using a relative URL:
-
-![An image](images/p8.png)
-
-This is an image using an absolute URL:
-
-![A different image](https://bryanduggandotorg.files.wordpress.com/2019/02/infinite-forms-00045.png?w=595&h=&zoom=2)
-
-This is a youtube video:
-
-[![YouTube](http://img.youtube.com/vi/SWo_kEITHo8/0.jpg)](https://www.youtube.com/watch?v=SWo_kEITHo8)
-
-This is a table:
-
-| Heading 1 | Heading 2 |
-|-----------|-----------|
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
+# More Screenshots:
+![An image](https://i.gyazo.com/cb6a4c62be416605525b9087d29f80b5.png)
+![An image](https://i.gyazo.com/5eb7fc55cf7fc251ed1a7e25891def20.png)
+![An image](https://media.discordapp.net/attachments/807375372714115137/919717844848087040/unknown.png)
