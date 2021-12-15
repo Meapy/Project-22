@@ -297,7 +297,7 @@ My idea is to create a solar system procedurally, all the planets have different
 
 
 # Video:
-[![YouTube](http://img.youtube.com/vi/SWo_kEITHo8/0.jpg)](https://www.youtube.com/watch?v=o7I3D1aKOC8)
+[![YouTube](http://img.youtube.com/vi/o7I3D1aKOC8/0.jpg)](https://www.youtube.com/watch?v=o7I3D1aKOC8)
 
 # More Screenshots:
 ![An image](https://i.gyazo.com/cb6a4c62be416605525b9087d29f80b5.png)
