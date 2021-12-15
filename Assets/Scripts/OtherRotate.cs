@@ -18,7 +18,7 @@ public class OtherRotate : MonoBehaviour
     void Update()
     {   
 
-        //rotate an object on the spot
+        //rotate an object on the spot or around the sun
         transform.RotateAround(target.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
     }
 }

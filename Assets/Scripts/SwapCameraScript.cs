@@ -79,9 +79,9 @@ public class SwapCameraScript : MonoBehaviour
 
     void addTargets()
     {
+        targets.Add(GameObject.Find("Earth").transform);
         targets.Add(GameObject.Find("Mercury").transform);
         targets.Add(GameObject.Find("Venus").transform);
-        targets.Add(GameObject.Find("Earth").transform);
         targets.Add(GameObject.Find("Mars").transform);
         targets.Add(GameObject.Find("Jupiter").transform);
     }

@@ -7,7 +7,6 @@ public class SpaceShipController : MonoBehaviour
     KeyCode descendKey = KeyCode.LeftShift;
     KeyCode rollCounterKey = KeyCode.LeftArrow;
     KeyCode rollClockwiseKey = KeyCode.RightArrow;
-    //set pitch up to up arrow
     KeyCode PitchUp = KeyCode.UpArrow;
     KeyCode PitchDown = KeyCode.DownArrow;
     KeyCode forwardKey = KeyCode.W;
@@ -24,7 +23,6 @@ public class SpaceShipController : MonoBehaviour
     public float rotSmoothSpeed = 2.5f;
     public bool lockCursor;
     Vector3 thrusterInput;
-    int numCollisionTouches = 0;
 
     void Start()
     {
