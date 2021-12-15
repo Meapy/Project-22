@@ -66,9 +66,6 @@ public class SpaceShipController : MonoBehaviour
         {
             GetComponent<Rigidbody>().AddRelativeForce(thrusterInput * thrustStrength);
         }
-
-
-
     }
 
     int GetInputAxis (KeyCode negativeAxis, KeyCode positiveAxis) 
