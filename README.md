@@ -14,6 +14,7 @@ There is also a more cinematic experience of the solar system. where the user ca
 The planets rotate around the sun and the moons rotate around the planets. The planets also rotate around their own axis. The sizes of the planets are made to be in scale to their realistic size apart from the Sun and Jupiter because of their sizes.
 
 The project uses the Universal Render Pipeline (URP) to render the planets using a shader graph and for the lighting.
+There are only 5 planets, 1 moon and the sun created.
 
 
 # Instructions for use
@@ -30,12 +31,126 @@ To attach the skybox, you have to import the asset from https://assetstore.unity
 The planets, moon's and the sun's surfaces are procedurally generated. Using the Planet.cs, TerrainFace.cs and the simple and rigid noise filter scripts. The user is able to edit the planets surfaces by playing around with the silders in the Inspector. As seen in this screenshot: ![An image](https://i.gyazo.com/281c8af1ea05f2ade74ca24ebda62180.png)
 The planets are created by this process:
 1: Generating a sphere **TerainFace.cs**
+```C#
+public void ConstructMesh()
+    {
+        Vector3[] vertices = new Vector3[resolution * resolution];
+        int[] triangles = new int[(resolution - 1) * (resolution - 1) * 6];
+        int triIndex = 0;
+        Vector2[] uv = (mesh.uv.Length == vertices.Length) ? mesh.uv : new Vector2[vertices.Length]; //used for higher resolutions 
+
+        for (int y = 0; y < resolution; y++)
+        {
+            for (int x = 0; x < resolution; x++)
+            {
+                int i = x + y * resolution;
+                Vector2 percent = new Vector2(x, y) / (resolution - 1);
+                Vector3 pointOnUnitCube = localUp + (percent.x - 0.5f) * 2 * axisA + (percent.y - 0.5f) * 2 * axisB;
+                Vector3 pointOnUnitSphere = pointOnUnitCube.normalized;
+                float unscaledElevation = shapeGenerator.CalculateUnscaledElevation(pointOnUnitSphere);
+                vertices[i] = pointOnUnitSphere * shapeGenerator.GetScaledElevation(unscaledElevation);
+                uv[i].y = unscaledElevation;
+
+                if (x != resolution - 1 && y != resolution - 1)
+                {
+                    triangles[triIndex] = i;
+                    triangles[triIndex + 1] = i + resolution + 1;
+                    triangles[triIndex + 2] = i + resolution;
+
+                    triangles[triIndex + 3] = i;
+                    triangles[triIndex + 4] = i + 1;
+                    triangles[triIndex + 5] = i + resolution + 1;
+                    triIndex += 6;
+                }
+            }
+        }
+        mesh.Clear();
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+        mesh.uv = uv;
+    }
+```
 2: Creating a settings editor for planet properties **Editor/PlanetEditor.cs**
 3: Combining multiple layers of simplex noise to create terrain **Noise.cs**
+```C#
+    NoiseSettings.SimpleNoiseSettings settings;
+    Noise noise = new Noise();
+    //create a constructor for noiseSettings
+    public SimpleNoiseFilter(NoiseSettings.SimpleNoiseSettings settings)
+    {
+        this.settings = settings;
+    }
+    public float Evaluate(Vector3 point)
+    {
+        float noiseValue = 0;
+        float frequency = settings.baseRoughness;
+        float amplitude = 1;
+
+        for (int i = 0; i < settings.numLayers; i++)
+        {
+            float v = noise.Evaluate(point * frequency + settings.centre);
+            noiseValue += (v + 1) * 0.5f * amplitude;
+            frequency *= settings.roughness;
+            amplitude *= settings.persistence;
+        }
+        noiseValue = noiseValue - settings.minValue;
+        return noiseValue * settings.strength;
+    }
+```
 4: Creating mountain ridges with a different noise filter **RidgidNoiseFilter.cs**
 5: Combining different noise types for more varied terrain **RidgidNoiseFilter.cs**
+```C#
+for (int i = 0; i < settings.numLayers; i++)
+        {
+            float v = 1-Mathf.Abs(noise.Evaluate(point * frequency + settings.centre));
+            v *= v;
+            v *= weight;
+            weight = Mathf.Clamp01(v * settings.weightMultiplier);
+
+            noiseValue += v * amplitude;
+            frequency *= settings.roughness;
+            amplitude *= settings.persistence;
+        }
+        noiseValue = noiseValue - settings.minValue;
+        return noiseValue * settings.strength;
+    } 
+```
 6: Using shadergraph to create a terrain shader **ColorSettings.cs** **ColorGenerator.cs**
+```C#
+public void UpdateColours()
+    {
+        Color[] colours = new Color[texture.width * texture.height];
+        int colourIndex = 0;
+        foreach(var biome in settings.biomeColourSettings.biomes)
+        {
+            for (int i = 0; i < textureResolution * 2; i++)
+            {
+                Color gradientColour;
+                if(i <  textureResolution)
+                {
+                    gradientColour = settings.oceanColour.Evaluate(i / (textureResolution - 1f));
+                }
+                else
+                {
+                    gradientColour = biome.gradient.Evaluate((i - textureResolution)/ (textureResolution - 1f));
+                }
+                Color tintColour = biome.tint;
+                colours[colourIndex] = gradientColour * (1-biome.tintPercent) + tintColour * biome.tintPercent;
+                colourIndex++;
+            }
+
+        }
+
+        texture.SetPixels(colours);
+        texture.Apply();
+        settings.planetMaterial.SetTexture("_texture", texture);
+    }
+```
 7: Adding ocean depth
+
+
+
 
 The planets rotation is done by the OtherRotate.cs script.
 ```c#
@@ -122,7 +237,7 @@ For the Cinematic Camera, the user can press C to change the camera. The script 
 Here is a screenshot of the cinematic camera of Earth, the Moon and Venus: ![An image](https://i.gyazo.com/2f60e8eeeebc086e44035b81763cfa2d.png)
 
 
-For the Spaceship Camera, depending on what direction the ship is facing, the camera will jump to the correct position and adjust which position it is facing. This is so the user always has a view of the ship and which direction it is heading in. 
+For the Spaceship Camera, depending on what direction the ship is facing, the camera will jump to the correct position and adjust which position it is facing. This is so the user always has a view of the ship and which direction it is heading in. Here is a small snipped of the code
 ```C#
             if((target.transform.eulerAngles.y > 60 && target.transform.eulerAngles.y < 140) )
             {
@@ -178,6 +293,11 @@ https://www.youtube.com/watch?v=QN39W020LqU&list=PLFt_AvWsXl0cONs3T0By4puYy6GM22
 What I am most proud of in the assignment is with how much i was able to get done, and how much I learned. My favourite part of the project is the cinematic camera on the Earth planet. 
 
 # Proposal submitted earlier can go here:
+My idea is to create a solar system procedurally, all the planets have different terrains, maybe even allowing the user to change how it is generated using sliders. Depending on how I manage, ~~I will attempt to also have it react to audio~~
+
+
+# Video:
+[![YouTube](http://img.youtube.com/vi/SWo_kEITHo8/0.jpg)](https://www.youtube.com/watch?v=SWo_kEITHo8)
 
 ## This is how to markdown text:
 
@@ -236,7 +356,7 @@ This is an image using an absolute URL:
 
 This is a youtube video:
 
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
+[![YouTube](http://img.youtube.com/vi/SWo_kEITHo8/0.jpg)](https://www.youtube.com/watch?v=SWo_kEITHo8)
 
 This is a table:
 
