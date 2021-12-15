@@ -303,3 +303,5 @@ My idea is to create a solar system procedurally, all the planets have different
 ![An image](https://i.gyazo.com/cb6a4c62be416605525b9087d29f80b5.png)
 ![An image](https://i.gyazo.com/5eb7fc55cf7fc251ed1a7e25891def20.png)
 ![An image](https://media.discordapp.net/attachments/807375372714115137/919717844848087040/unknown.png)
+![An image](https://i.gyazo.com/31005b49f250047123dd59720ee16256.png)
+![An image](https://i.gyazo.com/222ccadc45dcfd2b46f157de23d57a2e.png)
