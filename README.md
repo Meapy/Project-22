@@ -13,6 +13,8 @@ the planets ands moons are prcocedurally generated and the user can move around 
 There is also a more cinematic experience of the solar system. where the user can select between different cinematic cameras to view the solar system and the planets.
 The planets rotate around the sun and the moons rotate around the planets. The planets also rotate around their own axis. The sizes of the planets are made to be in scale to their realistic size apart from the Sun and Jupiter because of their sizes.
 
+The project uses the Universal Render Pipeline (URP) to render the planets using a shader graph and for the lighting.
+
 
 # Instructions for use
 to use the project, just load the sample scene in the unity editor. Depending if you want to play the cinematic version, or fly around using the spaceship. if you want to fly around, you have to enable the SpaceshipCamera Game object and disable the <PlanetName>Camera and CameraSwap Game objects.
@@ -24,7 +26,16 @@ To create more planets, you have to make a new material(Graphics folder), shape 
 To attach the skybox, you have to import the asset from https://assetstore.unity.com/packages/3d/environments/sci-fi/real-stars-skybox-lite-116333 (i used the StarSkyBox04)and then drag the skybox into the skybox slot in the unity editor for all the cameras. however it is also possible to just set background type to a black solid colour and you get the same effect.
 
 # How it works
+## The planets
 The planets, moon's and the sun's surfaces are procedurally generated. Using the Planet.cs, TerrainFace.cs and the simple and rigid noise filter scripts. The user is able to edit the planets surfaces by playing around with the silders in the Inspector. As seen in this screenshot: ![An image](https://i.gyazo.com/281c8af1ea05f2ade74ca24ebda62180.png)
+The planets are created by this process:
+1: Generating a sphere **TerainFace.cs**
+2: Creating a settings editor for planet properties **Editor/PlanetEditor.cs**
+3: Combining multiple layers of simplex noise to create terrain **Noise.cs**
+4: Creating mountain ridges with a different noise filter **RidgidNoiseFilter.cs**
+5: Combining different noise types for more varied terrain **RidgidNoiseFilter.cs**
+6: Using shadergraph to create a terrain shader **ColorSettings.cs** **ColorGenerator.cs**
+7: Adding ocean depth
 
 The planets rotation is done by the OtherRotate.cs script.
 ```c#
@@ -46,6 +57,7 @@ The planets rotation is done by the OtherRotate.cs script.
     }
 
 ```
+## Movement
 The ships movement is done by the SpaceShipController.cs script. and the camera is done by the SpaceshipCamera.cs script. which i heavily modified from one of Sebastian Lague's scripts.
 ```C#
     void Movement ()
@@ -105,7 +117,6 @@ For the Cinematic Camera, the user can press C to change the camera. The script 
         Vector3 newPosition = target.transform.position - target.transform.forward * target_Offset.z - target.transform.up * target_Offset.y;
         transform.position = Vector3.Slerp(transform.position, newPosition, Time.deltaTime * speed);
     }
-
 }
 ```
 Here is a screenshot of the cinematic camera of Earth, the Moon and Venus: ![An image](https://i.gyazo.com/2f60e8eeeebc086e44035b81763cfa2d.png)
